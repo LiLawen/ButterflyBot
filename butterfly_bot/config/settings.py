@@ -34,7 +34,7 @@ MAX_POSITION_RATIO = 0.25  # 最大使用资金比例（25%，降低风险敞口
 CONFIDENCE_THRESHOLD = 0.70  # 买入置信阈值（最优配置: 0.70，胜率55.56%，盈利因子2.19）
 SELL_THRESHOLD = 0.45  # 卖出/平仓阈值（调整到0.45，匹配模型预测概率分布）
 TREND_FILTER = True
-COOLDOWN_BARS = 5  # 平仓/开仓后的冷却条数（降低到5，约1.25小时）
+COOLDOWN_BARS = 4  # 平仓/开仓后的冷却条数（降低到5，约1.25小时）
 PROB_EMA_SPAN = 10  # 预测概率EMA平滑窗口（保持10）
 TIME_STOP_BARS = 50  # 时间止损：持仓超过N根K线未验证则平仓（延长至50，约12.5小时）
 USE_QUANTILE_THRESH = False  # 禁用分位数阈值，使用固定阈值
@@ -65,14 +65,14 @@ RETRAIN_ON_DEGRADATION = True
 RETRAIN_AUC_DIFF = 0.01
 # 当回测收益为负且 RETRAIN_ON_DEGRADATION 为 True 时也会触发重训练
 # 重训练拉取历史天数（优化为365天，平衡数据量和训练速度）
-RETRAIN_SINCE_DAYS = 30  # 优化到365天，关注近期市场特征
+RETRAIN_SINCE_DAYS = 365  # 优化到365天，关注近期市场特征
 # 重训练时的最大 K 线条数（fetch limit）
-RETRAIN_LIMIT = 5000
+RETRAIN_LIMIT = 10000
 # 是否将重训练放到后台线程异步执行（避免阻塞回测流程）
 RETRAIN_ASYNC = True
 RETRAIN_MAX_ATTEMPTS = 2  # 自动重训练最大尝试次数
 
-proxy = None  # 替换为你的代理地址（Clash 默认 7890，SS 通常是 1080）
+proxy = "http://127.0.0.1:1080"  # 替换为你的代理地址（Clash 默认 7890，SS 通常是 1080）
 
 BASE_PATH = Path(__file__).resolve().parent.parent
 LOG_PATH = BASE_PATH / 'logs'
@@ -94,7 +94,7 @@ AI_SIGNAL_CONFIG = {
 }
 
 # 风险管理配置
-MAX_DRAWDOWN = 0.50  # 最大回撤比例（临时调高到50%用于调试）
+MAX_DRAWDOWN = 0.2  # 最大回撤比例（临时调高到50%用于调试）
 
 RISK_MANAGEMENT_CONFIG = {
     "max_risk_per_trade": MAX_RISK_PER_TRADE,
@@ -108,6 +108,6 @@ BACKTEST_CONFIG = {
     "initial_balance": INITIAL_CASH,
     "leverage": 1,
     "contract_type": "spot",
-    "start_date": "2023-09-01",  # 3个月长周期回测
-    "end_date": "2023-11-30",
+    "start_date": "2025-01-01",  # 3个月长周期回测
+    "end_date": "2026-03-30",
 }
