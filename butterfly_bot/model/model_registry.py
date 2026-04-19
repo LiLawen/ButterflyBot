@@ -3,7 +3,8 @@ import json
 import joblib
 from datetime import datetime
 
-REGISTRY_DIR = "/home/ubuntu/ButterflyBot/models/registry"
+#REGISTRY_DIR = "/home/ubuntu/ButterflyBot/models/registry"
+REGISTRY_DIR = "./models/registry"
 
 def save_model_with_metadata(model, metadata):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
